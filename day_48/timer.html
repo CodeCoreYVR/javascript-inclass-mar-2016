@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>React.js</title>
+    <script src="react.js"></script>
+    <script src="react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.js"></script>
+  </head>
+  <body>
+    <div id="container"></div>
+
+    <script type="text/babel">
+      var Timer =  React.createClass({
+        getInitialState: function() {
+          return {time: new Date()};
+        },
+        componentDidMount: function() {
+          setInterval(this.tick, 1000);
+        },
+        tick: function(){
+          this.setState({time: new Date()});
+        },
+        render: function() {
+          return <div>{this.state.time.toString()}</div>;
+        }
+      });
+
+      ReactDOM.render(<Timer  />, document.getElementById('container'));
+    </script>
+
+  </body>
+</html>

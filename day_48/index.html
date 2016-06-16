@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>React.js</title>
+    <script src="react.js"></script>
+    <script src="react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.js"></script>
+  </head>
+  <body>
+    <div id="container"></div>
+
+    <script type="text/babel">
+      var Box =  React.createClass({
+        getInitialState: function(){
+          // must return an object
+          return {color: "red"};
+        },
+        changeColor: function(){
+          // DON't Do this
+          // this.state = {color: "green"};
+
+          // Always do this:
+          // this.setState({color: "green"});
+          if(this.state.color === "red") {
+            this.setState({color: "green"});
+          } else {
+            this.setState({color: "red"});
+          }
+        },
+        render: function() {
+          var styles = {width: this.props.dimension + "px",
+                        height: this.props.dimension + "px",
+                        backgroundColor: this.state.color
+                      };
+          return <div style={styles} onClick={this.changeColor}>Hello World</div>;
+        }
+      });
+
+      ReactDOM.render(<Box dimension="200" />, document.getElementById('container'));
+    </script>
+
+  </body>
+</html>

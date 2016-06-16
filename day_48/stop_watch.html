@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>React.js</title>
+    <script src="react.js"></script>
+    <script src="react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.js"></script>
+  </head>
+  <body>
+    <div id="container"></div>
+
+    <script type="text/babel">
+      var StopWatch =  React.createClass({
+        getInitialState: function() {
+          return {time: 0};
+        },
+        interval: null,
+        startTimer: function(){
+          if(!this.interval) {
+            this.interval = setInterval(this.tick, 1000);
+          }
+        },
+        stopTimer: function(){
+          clearInterval(this.interval);
+          this.interval = null;
+        },
+        resetTimer: function(){
+          this.stopTimer();
+          this.setState({time: 0});
+        },
+        tick: function(){
+          this.setState({time: this.state.time + 1});
+        },
+        componentDidMount: function(){
+          this.startTimer();
+        },
+        render: function() {
+          return <div>
+                  <p>{this.state.time}</p>
+                  <a href="javascript:void(0)" onClick={this.startTimer}>Start</a>
+                  <br />
+                  <a href="javascript:void(0)" onClick={this.stopTimer}>Stop</a>
+                  <br />
+                  <a href="javascript:void(0)" onClick={this.resetTimer}>Reset</a>
+                  <br />
+                 </div>;
+        }
+      });
+
+      ReactDOM.render(<StopWatch  />, document.getElementById('container'));
+    </script>
+
+  </body>
+</html>

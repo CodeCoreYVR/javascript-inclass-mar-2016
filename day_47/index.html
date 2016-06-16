@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hello React.js</title>
+    <script src="react.min.js"></script>
+    <script src="react-dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.js"></script>
+  </head>
+  <body>
+    <div id="container"></div>
+    <div id="container-1"></div>
+    <div id="container-2"></div>
+
+    <script type="text/babel">
+
+      var Person = React.createClass({
+        render: function() {
+          var nameDisplay = {color: "red"};
+          return <span style={nameDisplay}>{this.props.name}</span>;
+        }
+      });
+
+      var HelloWorld = React.createClass({
+        render: function() {
+          return <div>
+                  <h1>Hello World</h1>
+                  <p>React.js is Awesome!</p>
+                  <p>Hello <Person name="John" /></p>
+                  <p>Hello <Person name="Tom" /></p>
+                  <p>Hello <Person name="Jimmy" /></p>
+                 </div>;
+        }
+      });
+
+      var Circle = React.createClass({
+        render: function() {
+          var circleType = {backgroundColor: this.props.color, height: "50px", width: "50px", borderRadius: "50%"};
+          return <div style={circleType}></div>;
+        }
+      });
+
+      var Box = React.createClass({
+        render: function() {
+
+          var boxType = {backgroundColor: this.props.color,
+                         height: this.props.dimension,
+                         width:  this.props.dimension
+                       };
+
+          var circles = this.props.colors.map(function(color){
+            return <Circle color={color} />;
+          });
+
+          return <div style={boxType}>{circles}</div>;
+        }
+      })
+
+      ReactDOM.render(<HelloWorld />, document.getElementById('container'));
+      ReactDOM.render(<Circle color="red" />, document.getElementById('container-1'));
+      ReactDOM.render(<Box color="blue" dimension="200" colors={["red", "cyan", "black", "brown"]} />, document.getElementById('container-2'));
+    </script>
+  </body>
+</html>
